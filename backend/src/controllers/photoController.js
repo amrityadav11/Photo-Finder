@@ -11,7 +11,7 @@ const {
   sendPaginated,
 } = require('../utils/apiResponse');
 const { buildPagination } = require('../utils/helpers');
-const { uploadFileToCloudinary, deleteFromCloudinary } = require('../config/cloudinary');
+const { uploadToCloudinary, deleteFromCloudinary } = require('../config/cloudinary');
 const { addPhotoProcessingJob } = require('../workers/photoProcessor');
 const logger = require('../utils/logger');
 
@@ -32,8 +32,8 @@ const uploadPhotos = asyncHandler(async (req, res) => {
 
   for (const file of req.files) {
     try {
-      // Upload original to Cloudinary
-      const result = await uploadFileToCloudinary(file.path, {
+      // Upload from memory buffer to Cloudinary (no disk storage needed)
+      const result = await uploadToCloudinary(file.buffer, {
         folder: `qr-photo-finder/events/${event.slug}/photos`,
         resource_type: 'image',
         use_filename: false,
@@ -77,13 +77,10 @@ const uploadPhotos = asyncHandler(async (req, res) => {
         threshold: event.faceSimilarityThreshold,
       });
 
-      // Cleanup temp file
-      fs.unlink(file.path, () => {});
+      // No temp file to cleanup when using memory storage
     } catch (err) {
       logger.error(`Photo upload failed for ${file.originalname}:`, err);
       failedFiles.push(file.originalname);
-      // Cleanup temp file even on error
-      fs.unlink(file.path, () => {});
     }
   }
 

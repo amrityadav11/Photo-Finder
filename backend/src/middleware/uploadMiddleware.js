@@ -54,9 +54,10 @@ const diskStorage = multer.diskStorage({
  */
 const memoryStorage = multer.memoryStorage();
 
-// ─── Uploader for event photos (disk storage, multiple files) ─────────────────
+// ─── Uploader for event photos (memory storage, multiple files) ───────────────
+// Using memory storage for cloud deployment (Render/Vercel) - files uploaded directly to Cloudinary
 const uploadEventPhotos = multer({
-  storage: diskStorage,
+  storage: memoryStorage,
   limits: {
     fileSize: MAX_FILE_SIZE_MB * 1024 * 1024,
     files: MAX_FILES_PER_UPLOAD,
