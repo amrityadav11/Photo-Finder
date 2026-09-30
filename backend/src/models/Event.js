@@ -115,8 +115,8 @@ const eventSchema = new mongoose.Schema(
 );
 
 // ─── Indexes ──────────────────────────────────────────────────────────────────
+// Note: slug index is already created by unique:true in the schema field definition
 eventSchema.index({ owner: 1 });
-eventSchema.index({ slug: 1 }, { unique: true });
 eventSchema.index({ status: 1 });
 eventSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0, sparse: true });
 eventSchema.index({ owner: 1, createdAt: -1 });

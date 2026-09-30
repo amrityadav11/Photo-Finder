@@ -73,8 +73,8 @@ const guestSearchSchema = new mongoose.Schema(
 );
 
 // ─── Indexes ──────────────────────────────────────────────────────────────────
+// Note: searchId index is already created by unique:true in the schema field definition
 guestSearchSchema.index({ event: 1 });
-guestSearchSchema.index({ searchId: 1 }, { unique: true });
 guestSearchSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 guestSearchSchema.index({ createdAt: -1 });
 

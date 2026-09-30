@@ -10,8 +10,7 @@
     "dev:frontend": "cd frontend && npm start",
     "install:backend": "cd backend && npm install",
     "install:frontend": "cd frontend && npm install",
-    "install:all": "npm run install:backend && npm run install:frontend",
-    "vercel-build": "cd frontend && npm install && npm run build"
+    "install:all": "npm run install:backend && npm run install:frontend"
   },
   "workspaces": [
     "frontend",
@@ -19,10 +18,6 @@
   ],
   "engines": {
     "node": ">=18.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-username/qr-photo-finder.git"
   },
   "keywords": [
     "qr-code",
@@ -33,7 +28,5 @@
     "react",
     "nodejs",
     "mongodb"
-  ],
-  "author": "Your Name",
-  "license": "MIT"
+  ]
 }

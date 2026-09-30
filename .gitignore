@@ -63,9 +63,6 @@ jspm_packages/
 ehthumbs.db
 Thumbs.db
 
-# Vercel
-.vercel
-
 # Temporary folders
 tmp/
 temp/

@@ -7,26 +7,25 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 
-// CORS: allow all origins (handles Vercel preview URLs dynamically)
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow any origin — restrict this list once custom domain is set
-    return callback(null, true);
+    // Allow requests with no origin (Postman, mobile apps, etc.)
+    if (!origin) return callback(null, true);
+    // In development, allow any origin
+    if (process.env.NODE_ENV !== 'production') return callback(null, true);
+    // In production, restrict to CLIENT_URL
+    const allowed = [process.env.CLIENT_URL].filter(Boolean);
+    if (allowed.includes(origin)) return callback(null, true);
+    return callback(new Error(`CORS: origin ${origin} not allowed`));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   optionsSuccessStatus: 200
 };
-const connectDB = require('./config/db');
 const { configureCloudinary } = require('./config/cloudinary');
 const logger = require('./utils/logger');
 const { sendError } = require('./utils/apiResponse');
-
-// Connect to database (for serverless functions)
-if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
-  connectDB();
-}
 
 // Route imports
 const authRoutes = require('./routes/authRoutes');
@@ -39,7 +38,7 @@ const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 
-// ─── Configure trust proxy for Render ───────────────────────────────────────
+// ─── Trust proxy (needed when behind a reverse proxy / load balancer) ────────
 app.set('trust proxy', 1);
 
 // ─── Configure external services ────────────────────────────────────────────
