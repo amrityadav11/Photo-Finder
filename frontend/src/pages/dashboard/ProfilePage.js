@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const [changingPassword, setChangingPassword] = useState(false);
   const [avatarPreview, setAvatarPreview] = useState(null);
 
-  const { register, handleSubmit, formState: { errors }, reset: resetProfile } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: { name: user?.name || '' },
   });
 

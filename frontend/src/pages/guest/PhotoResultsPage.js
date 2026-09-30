@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   Download, X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut,
@@ -56,7 +56,7 @@ const Lightbox = ({ photos, currentIndex, onClose, onPrev, onNext, onDownload, a
       <div className="flex-1 relative overflow-hidden flex items-center justify-center">
         <img
           src={photo.previewUrl || photo.thumbnailUrl}
-          alt={`Photo ${currentIndex + 1}`}
+          alt={`Result ${currentIndex + 1}`}
           className="max-w-full max-h-full object-contain transition-transform duration-200"
           style={{ transform: `scale(${zoom})` }}
           draggable={false}
@@ -194,7 +194,7 @@ const PhotoResultsPage = () => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({ title: 'My Event Photos', url: window.location.href })
-        .catch(() => {});
+        .catch(() => { });
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast.success('Link copied!');

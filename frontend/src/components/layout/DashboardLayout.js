@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet, NavLink, useNavigate, Link } from 'react-router-dom';
 import {
   QrCode, LayoutDashboard, CalendarDays, PlusCircle,
-  BarChart2, User, Settings, LogOut, Menu, X, ChevronRight, Bell
+  User, LogOut, Menu, X, ChevronRight, Bell
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -19,10 +19,9 @@ const SidebarLink = ({ to, icon: Icon, label, end, onClick }) => (
     end={end}
     onClick={onClick}
     className={({ isActive }) =>
-      `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
-        isActive
-          ? 'bg-violet-600 text-white shadow-sm shadow-violet-200'
-          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+      `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${isActive
+        ? 'bg-violet-600 text-white shadow-sm shadow-violet-200'
+        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
       }`
     }
   >

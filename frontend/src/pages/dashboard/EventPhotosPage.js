@@ -5,7 +5,6 @@ import { photosAPI } from '../../services/api';
 import { useEvent } from '../../hooks/useEvents';
 import useProcessingStatus from '../../hooks/useProcessingStatus';
 import { ConfirmModal } from '../../components/ui/Modal';
-import Badge from '../../components/ui/Badge';
 import { InlineLoader } from '../../components/ui/LoadingSpinner';
 import EmptyState from '../../components/ui/EmptyState';
 import toast from 'react-hot-toast';
@@ -198,9 +197,8 @@ const EventPhotosPage = () => {
         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
         onClick={() => !uploading && fileInputRef.current?.click()}
-        className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${
-          dragOver ? 'border-violet-400 bg-violet-50' : 'border-gray-200 hover:border-violet-300 hover:bg-gray-50'
-        } ${uploading ? 'pointer-events-none opacity-75' : ''}`}
+        className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${dragOver ? 'border-violet-400 bg-violet-50' : 'border-gray-200 hover:border-violet-300 hover:bg-gray-50'
+          } ${uploading ? 'pointer-events-none opacity-75' : ''}`}
         role="button"
         aria-label="Upload photos"
       >

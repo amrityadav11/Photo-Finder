@@ -172,9 +172,9 @@ const RegisterPage = () => {
               />
               <label htmlFor="terms" className="text-sm text-gray-600">
                 I agree to the{' '}
-                <a href="#" className="text-violet-600 hover:underline">Terms of Service</a>
+                <button type="button" onClick={() => toast('Terms of Service available soon')} className="text-violet-600 hover:underline">Terms of Service</button>
                 {' '}and{' '}
-                <a href="#" className="text-violet-600 hover:underline">Privacy Policy</a>
+                <button type="button" onClick={() => toast('Privacy Policy available soon')} className="text-violet-600 hover:underline">Privacy Policy</button>
               </label>
             </div>
             {errors.terms && <p className="text-xs text-red-500 -mt-3">{errors.terms.message}</p>}

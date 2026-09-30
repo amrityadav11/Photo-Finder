@@ -35,7 +35,7 @@ const CreateEventPage = () => {
   const [loading, setLoading] = useState(false);
   const [coverPreview, setCoverPreview] = useState(null);
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       allowDownloads: true,
       allowOriginalDownloads: false,

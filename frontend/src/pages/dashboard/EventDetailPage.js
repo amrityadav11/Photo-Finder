@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, QrCode, Upload, BarChart2, Settings, Trash2,
-  Copy, Download, ExternalLink, CheckCircle, Clock, AlertCircle,
+  Copy, Download, ExternalLink, CheckCircle, AlertCircle,
   Image, Search, Users, Eye, RefreshCw, Globe
 } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
@@ -28,8 +28,8 @@ const ProcessingCard = ({ eventId, photoCount }) => {
     <div className={`card p-5 border-l-4 ${done ? 'border-emerald-400' : failed ? 'border-red-400' : 'border-violet-400'}`}>
       <div className="flex items-center gap-3 mb-3">
         {done ? <CheckCircle className="w-5 h-5 text-emerald-500" /> :
-         failed ? <AlertCircle className="w-5 h-5 text-red-500" /> :
-         <RefreshCw className="w-5 h-5 text-violet-500 animate-spin" />}
+          failed ? <AlertCircle className="w-5 h-5 text-red-500" /> :
+            <RefreshCw className="w-5 h-5 text-violet-500 animate-spin" />}
         <span className="font-semibold text-gray-900 text-sm">
           {done ? 'AI Processing Complete' : failed ? 'Processing Failed' : 'AI Processing…'}
         </span>
@@ -70,7 +70,7 @@ const ProcessingCard = ({ eventId, photoCount }) => {
 
 // ─── QR Card ─────────────────────────────────────────────────────────────────
 const QRCard = ({ event }) => {
-  const [qrData, setQrData] = useState(event.qrCode);
+  const [, setQrData] = useState(event.qrCode);
   const [loading, setLoading] = useState(false);
   const eventUrl = event.qrCode?.publicUrl || `${window.location.origin}/e/${event.slug}`;
 
@@ -205,7 +205,7 @@ const QRCard = ({ event }) => {
 const EventDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { event, loading, refetch } = useEvent(id);
+  const { event, loading } = useEvent(id);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
 

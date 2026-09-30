@@ -359,11 +359,10 @@ const Pricing = () => {
           {plans.map((plan, i) => (
             <div
               key={i}
-              className={`relative rounded-2xl p-6 flex flex-col ${
-                plan.highlighted
+              className={`relative rounded-2xl p-6 flex flex-col ${plan.highlighted
                   ? 'bg-violet-600 text-white shadow-2xl shadow-violet-200 scale-105'
                   : 'bg-white border border-gray-200'
-              }`}
+                }`}
             >
               {plan.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full">
@@ -393,11 +392,10 @@ const Pricing = () => {
 
               <Link
                 to="/register"
-                className={`w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${
-                  plan.highlighted
+                className={`w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${plan.highlighted
                     ? 'bg-white text-violet-600 hover:bg-violet-50'
                     : 'bg-violet-600 text-white hover:bg-violet-700'
-                }`}
+                  }`}
               >
                 {plan.cta}
               </Link>
@@ -554,9 +552,9 @@ const Footer = () => (
           <div>
             <p className="text-white text-sm font-semibold mb-3">Legal</p>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Cookie Policy</a></li>
+              <li><button type="button" onClick={() => window.scrollTo({ top: document.querySelector('#privacy')?.offsetTop || 0, behavior: 'smooth' })} className="hover:text-white transition-colors">Privacy Policy</button></li>
+              <li><button type="button" onClick={() => window.scrollTo({ top: document.querySelector('#terms')?.offsetTop || 0, behavior: 'smooth' })} className="hover:text-white transition-colors">Terms of Service</button></li>
+              <li><button type="button" onClick={() => window.scrollTo({ top: document.querySelector('#cookies')?.offsetTop || 0, behavior: 'smooth' })} className="hover:text-white transition-colors">Cookie Policy</button></li>
             </ul>
           </div>
         </div>

@@ -76,7 +76,7 @@ const LoginPage = () => {
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="label mb-0" htmlFor="password">Password</label>
-                <a href="#" className="text-xs text-violet-600 hover:text-violet-700">Forgot password?</a>
+                <button type="button" onClick={() => toast('Password reset feature coming soon!')} className="text-xs text-violet-600 hover:text-violet-700">Forgot password?</button>
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
