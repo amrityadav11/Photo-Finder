@@ -81,7 +81,7 @@ const processJob = async (job) => {
       return;
     }
 
-    // Save each face embedding to MongoDB
+    // Save each face embedding to MongoDB AND add to Face++ FaceSet
     const embeddingDocs = faceEmbeddings.map((fe) => ({
       event: eventId,
       photo: photoId,
@@ -93,6 +93,15 @@ const processJob = async (job) => {
     }));
 
     await FaceEmbedding.insertMany(embeddingDocs);
+
+    // Add each face token to Face++ FaceSet for fast server-side search
+    if (faceService.getProvider().name === 'facepp') {
+      for (const fe of faceEmbeddings) {
+        if (fe.faceToken) {
+          await faceService.addFaceToSet(eventId, fe.faceToken, photoId);
+        }
+      }
+    }
 
     // Update photo record
     await Photo.findByIdAndUpdate(photoId, {
@@ -126,17 +135,17 @@ const processJob = async (job) => {
       // Reset status to pending for retry
       await Photo.findByIdAndUpdate(photoId, {
         processingStatus: 'pending',
-      }).catch(() => {});
+      }).catch(() => { });
     } else {
       // Mark as failed after max retries
       await Photo.findByIdAndUpdate(photoId, {
         processingStatus: 'failed',
         processingError: err.message,
-      }).catch(() => {});
+      }).catch(() => { });
 
       await Event.findByIdAndUpdate(eventId, {
         $inc: { processedPhotoCount: 1, failedPhotoCount: 1 },
-      }).catch(() => {});
+      }).catch(() => { });
 
       await checkEventCompletion(eventId);
 
